@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "white",
     backgroundColor: colors.primary800,
-    // alignSelf:'flex-end',
     padding: 1,
   },
 });

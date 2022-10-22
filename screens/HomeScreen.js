@@ -1,4 +1,9 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import global from "../style/global";
@@ -9,26 +14,33 @@ import Locations from "../components/Locations";
 
 const HomeScreen = () => {
   const [enteredText, setEnteredText] = useState("");
+  const [filter, setFilter] = useState("");
+
+  const filterHandler = (filter) => {
+    setFilter(filter);
+  };
 
   const searchInputHandler = (enteredText) => {
     setEnteredText(enteredText);
   };
   return (
     <SafeAreaView style={[global.flexOne, { backgroundColor: "white" }]}>
-      <View style={[global.flexOne, global.container]}>
-        <Title style={styles.title}>Where would you like to travel?</Title>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+        <View style={[global.flexOne, global.container]}>
+          <Title style={styles.title}>Where would you like to travel?</Title>
 
-        <View>
-          <TextInput
-            placeholder="Search"
-            style={styles.searchInput}
-            value={enteredText}
-            onChangeText={searchInputHandler}
-          />
+          <View>
+            <TextInput
+              placeholder="Search"
+              style={styles.searchInput}
+              value={enteredText}
+              onChangeText={searchInputHandler}
+            />
+          </View>
+          <Continents filterHandler={filterHandler} />
+          <Locations filter={filter} />
         </View>
-        <Continents />
-        <Locations />
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
